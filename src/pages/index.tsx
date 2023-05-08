@@ -3,6 +3,7 @@ import {Inter} from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import {FormEvent, useState} from "react";
 import {Box} from "@chakra-ui/react";
+import {AUTH_INFOS} from "@/constant/storage";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -17,7 +18,7 @@ export default function Home() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        localStorage.setItem("authInfos", JSON.stringify(authInfos));
+        localStorage.setItem(AUTH_INFOS, JSON.stringify(authInfos));
     }
 
     function handleInputChange<T>(originalFlatObj: T, attribute: keyof T){
