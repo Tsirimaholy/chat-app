@@ -6,21 +6,27 @@ import {HOME_ROUTE, LOGIN} from "@/constant/routes";
 import {CircularProgress} from "@chakra-ui/react";
 import {delay} from "@/utils/timing";
 import {wrapper} from "@/styles/Home.module.css";
+import {useStore} from "@/store/root-store";
 
 
 export default function Home() {
     const {push} = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const {user} = useStore();
+
     useEffect(() => {
         (async () => {
+            const isAuthenticated = JSON.parse(localStorage.getItem(AUTH_INFOS)) && user;
+
             setIsLoading(true);
-            const isAuthenticated = JSON.parse(localStorage.getItem(AUTH_INFOS));
             await delay(2000);
+
             if (isAuthenticated) {
                 push(HOME_ROUTE)
             } else {
                 push(LOGIN);
             }
+
             setIsLoading(false)
         })()
     }, [])

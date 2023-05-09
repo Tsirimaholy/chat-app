@@ -7,7 +7,7 @@ import {delay} from "@/utils/timing";
 import {CHAT} from "@/constant/routes";
 import {Inter} from "next/font/google";
 import {AuthInfos} from "@/models/Auth";
-
+import {useStore} from "@/store/root-store"
 
 const inter = Inter({subsets: ['latin']})
 
@@ -16,11 +16,14 @@ function Login() {
     const [authInfos, setAuthInfos] = useState<AuthInfos>(null);
     const [loading, setIsLoading] = useState(false);
     const {push} = useRouter();
+    const {user, updateAuthInfos} = useStore();
 
     async function handleSubmit(e: FormEvent) {
         setIsLoading(true)
         e.preventDefault();
+
         localStorage.setItem(AUTH_INFOS, JSON.stringify(authInfos));
+        updateAuthInfos({...authInfos})
         await delay(5000)
         setIsLoading(false)
         push(CHAT);
@@ -36,7 +39,8 @@ function Login() {
     return (
         <main className={`${styles.main} ${inter.className}`}>
             <form className={styles.wrapper}>
-                {loading && <CircularProgress value={30} color='orange' thickness='12px' isIndeterminate={true} position={"absolute"}/>}
+                {loading && <CircularProgress value={30} color='orange' thickness='12px' isIndeterminate={true}
+                                              position={"absolute"}/>}
                 <label>
                     <input type={"text"} name={"username"}
                            className={`${styles.wrapper__input}`}
