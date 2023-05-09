@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from 'react';
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Login.module.css";
 import {CircularProgress} from "@chakra-ui/react";
 import {useRouter} from "next/navigation";
 import {AUTH_INFOS} from "@/constant/storage";
