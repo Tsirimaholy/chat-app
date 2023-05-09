@@ -6,13 +6,11 @@ import {AUTH_INFOS} from "@/constant/storage";
 import {delay} from "@/utils/timing";
 import {CHAT} from "@/constant/routes";
 import {Inter} from "next/font/google";
+import {AuthInfos} from "@/models/Auth";
 
 
 const inter = Inter({subsets: ['latin']})
-type AuthInfos = {
-    username: string;
-    password: string;
-}
+
 
 function Login() {
     const [authInfos, setAuthInfos] = useState<AuthInfos>(null);
