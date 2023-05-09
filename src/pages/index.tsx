@@ -2,8 +2,12 @@ import Head from 'next/head'
 import {Inter} from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import {FormEvent, useState} from "react";
-import {Box} from "@chakra-ui/react";
 import {AUTH_INFOS} from "@/constant/storage";
+import {useRouter} from "next/navigation";
+import {CircularProgress} from "@chakra-ui/react";
+import {delay} from "@/utils/timing";
+import {CHAT} from "@/constant/routes";
+
 
 const inter = Inter({subsets: ['latin']})
 
@@ -15,13 +19,19 @@ type AuthInfos = {
 
 export default function Home() {
     const [authInfos, setAuthInfos] = useState<AuthInfos>(null);
+    const [loading, setIsLoading] = useState(false);
+    const {push} = useRouter();
 
-    function handleSubmit(e: FormEvent) {
+    async function handleSubmit(e: FormEvent) {
+        setIsLoading(true)
         e.preventDefault();
         localStorage.setItem(AUTH_INFOS, JSON.stringify(authInfos));
+        await delay(5000)
+        setIsLoading(false)
+        push(CHAT);
     }
 
-    function handleInputChange<T>(originalFlatObj: T, attribute: keyof T){
+    function handleInputChange<T>(originalFlatObj: T, attribute: keyof T) {
         return (event) => setAuthInfos({
             ...originalFlatObj,
             [attribute]: event.target.value
@@ -38,21 +48,22 @@ export default function Home() {
             </Head>
             <main className={`${styles.main} ${inter.className}`}>
                 <form className={styles.wrapper}>
+                    {loading && <CircularProgress value={30} color='orange' thickness='12px' isIndeterminate={true}/>}
                     <label>
                         <input type={"text"} name={"username"}
                                className={`${styles.wrapper__input}`}
                                onChange={handleInputChange<AuthInfos>(authInfos, "username")}
-                                placeholder={"Username or Email"}
+                               placeholder={"Username or Email"}
                         />
                     </label>
                     <label>
                         <input type={"password"} name={"password"}
                                className={`${styles.wrapper__input}`}
                                onChange={handleInputChange(authInfos, "password")}
-                            placeholder={"Password"}
+                               placeholder={"Password"}
                         />
                     </label>
-                    <input type={"submit"} value={"Log In"} className={styles.submit} onClick={handleSubmit}/>
+                    <input type={"submit"} value={"Sign Up"} className={styles.submit} onClick={handleSubmit}/>
                 </form>
             </main>
         </>
