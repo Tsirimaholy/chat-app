@@ -1,6 +1,29 @@
 import Head from 'next/head'
+import {useEffect, useState} from "react";
+import {AUTH_INFOS} from "@/constant/storage"
+import {useRouter} from "next/navigation";
+import {HOME_ROUTE, LOGIN} from "@/constant/routes";
+import {CircularProgress} from "@chakra-ui/react";
+import {delay} from "@/utils/timing";
+import {wrapper} from "@/styles/Home.module.css";
+
 
 export default function Home() {
+    const {push} = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
+    useEffect(() => {
+        (async () => {
+            setIsLoading(true);
+            const isAuthenticated = JSON.parse(localStorage.getItem(AUTH_INFOS));
+            await delay(2000);
+            if (isAuthenticated) {
+                push(HOME_ROUTE)
+            } else {
+                push(LOGIN);
+            }
+            setIsLoading(false)
+        })()
+    }, [])
 
     return (
         <>
@@ -10,6 +33,9 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <main className={`${wrapper}`}>
+                {isLoading && <CircularProgress value={30} color='orange' thickness='12px' isIndeterminate={true}/>}
+            </main>
         </>
     )
 }
