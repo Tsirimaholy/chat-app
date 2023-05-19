@@ -15,7 +15,7 @@ export const useStore = create<State & Action>((set) => ({
         username: "",
         password:""
     },
-    updateAuthInfos: (authInfos) => set((state)=> ({ ...state.user,  ...authInfos})),
+    updateAuthInfos: (authInfos) => set((state)=> ({user: {...authInfos}})),
     logout: () => set(() => null)
 }))
 
