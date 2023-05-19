@@ -9,16 +9,16 @@ type State = {
 
 type Action = {
     updateAuthInfos: (authInfos: State["user"]) => void;
-    logout: ()=>void
+    logout: () => void
 }
 
 export const useStore = create<State & Action>(persist((set) => ({
     user: {
         username: "",
-        password:""
+        password: ""
     },
-    updateAuthInfos: (authInfos) => set(()=> ({user: {...authInfos}})),
-    logout: () => set(() => null)
+    updateAuthInfos: (authInfos) => set(() => ({user: {...authInfos}})),
+    logout: () => set(() => ({user: {username: "", password: ""}}))
 }), {
     name: AUTH_INFOS,
 }))
