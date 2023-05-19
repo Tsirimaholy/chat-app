@@ -1,1 +1,1 @@
-export const AUTH_INFOS="authInfos";
+export const AUTH_INFOS="auth-infos";
