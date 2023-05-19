@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {useStore} from "@/store/root-store";
-import {Avatar, Badge, Box, Text} from "@chakra-ui/react";
-import styles from "@/styles/Chat.module.css";
-import {Icon} from "@chakra-ui/icons";
+import {Box, List, ListItem, Text} from "@chakra-ui/react";
+import {AddIcon} from "@chakra-ui/icons";
+import {NavBar} from "@/components/core/nav-bar";
 
 
 function Chat() {
     const {user, logout} = useStore()
     const [menuToggle, setMenuToggle] = useState(false);
+    const channels = ["chanel1", "some chanel", "zod", "Golem"]
     const toggle = () => {
         setMenuToggle(prevState => !prevState)
     }
@@ -19,33 +20,24 @@ function Chat() {
 
     return (
         <main>
-            <nav className={styles.main_nav}>
-                <div className={".right__nav"}>
-
-                </div>
-                <div>
-                    <div className={styles.avatar_wrapper}
-                         onClick={toggle}
-                         onBlur={toggle}
-                    >
-                        <Avatar size={"2xs"} name={`${user.username}`} src={"/assets/icon/user-avatar.png"}
-                                width={35}
-                                height={35}
-                                colorScheme={"blackAlpha"}
-                                color={"white"}
-                        />
-                        <Text color={"white"} as="b">{`@${user.username}`}</Text>
-                        {menuToggle && <div className={styles.menu}>
-                            <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                                <Badge borderRadius='full' px='2' colorScheme='teal' onClick={handleLogout}>
-                                    <span className={"fa fa-lock"}/> Log Out
-                                </Badge>
-                            </Box>
-                        </div>}
-
-                    </div>
-                </div>
-            </nav>
+            <NavBar onClick={toggle} user={user} menuToggle={menuToggle} onBadgeClicked={handleLogout}/>
+            {/*sidebar*/}
+            <Box backgroundColor={"var(--secondary-color)"} w={"12%"} h={"100vh"} top={"70"} pt={20} pl={"7"}
+                 scrollBehavior={"smooth"} overflowY={"scroll"} position={"fixed"}>
+                {/*Add channel*/}
+                <Box display={"block"}>
+                    <Text display={"inline"}>Create chanel <AddIcon boxSize={10}/></Text>
+                </Box>
+                {/*Chanel list*/}
+                <List mt={10}>
+                    <Text color={"#aa05aa"} fontSize={"lg"} as={"b"}>Channels List</Text>
+                    {channels.map(chanel => (
+                        <ListItem style={{cursor: "pointer", marginBlock: 4}}>
+                            <span style={{fontWeight: "bold", fontSize: "large"}}># </span>{chanel}
+                        </ListItem>
+                    ))}
+                </List>
+            </Box>
         </main>);
 }
 
