@@ -1,5 +1,7 @@
 import {create} from "zustand";
 import {AuthInfos} from "@/models/Auth";
+import {persist} from "zustand/middleware";
+import {AUTH_INFOS} from "@/constant/storage";
 
 type State = {
     user: AuthInfos
@@ -10,12 +12,14 @@ type Action = {
     logout: ()=>void
 }
 
-export const useStore = create<State & Action>((set) => ({
+export const useStore = create<State & Action>(persist((set) => ({
     user: {
         username: "",
         password:""
     },
-    updateAuthInfos: (authInfos) => set((state)=> ({user: {...authInfos}})),
+    updateAuthInfos: (authInfos) => set(()=> ({user: {...authInfos}})),
     logout: () => set(() => null)
+}), {
+    name: AUTH_INFOS,
 }))
 
