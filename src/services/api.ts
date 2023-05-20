@@ -2,6 +2,10 @@ import Axios from "axios";
 import config from "./api-conf";
 
 
-export default Axios.create({
+const api = Axios.create({
     baseURL: config.baseUrl,
 });
+
+
+export default api;
+

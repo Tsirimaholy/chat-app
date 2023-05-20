@@ -10,7 +10,14 @@ export type AuthUser = {
 class UserApi {
     async logIn(userDetails: AuthUser) {
         const {data} = await api.post<User>("/users/login", userDetails);
-        return data?.user as User;
+        const user = data?.user as User;
+        // JWT intercept
+        api.interceptors.request.use((config) => {
+            config.headers.Authorization = "JWT " + user.token;
+            return config;
+        })
+
+        return user;
     }
 
     signUp() {

@@ -9,6 +9,7 @@ export interface User {
     mail: string;
     bio: string;
     name: string;
+    token: string;
 }
 
 export interface UserProfile extends User{
@@ -17,5 +18,4 @@ export interface UserProfile extends User{
     createdAt: string;
     updatedAt: string;
     deletedAt?: string;
-    token: string;
 }
