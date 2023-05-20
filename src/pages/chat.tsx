@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useStore} from "@/store/root-store";
 import {Box, List, ListItem, Text} from "@chakra-ui/react";
 import {AddIcon} from "@chakra-ui/icons";
 import {NavBar} from "@/components/core/nav-bar";
+import {useChannelStore} from "@/store/channel-store";
 
 function Chat() {
     const {user, logout} = useStore()
     const [menuToggle, setMenuToggle] = useState(false);
-    const channels = ["chanel1", "some chanel", "zod", "Golem"]
+    const {channels, getChannels} = useChannelStore();
+
+    useEffect(() => {
+        getChannels()
+    }, [])
     const toggle = () => {
         setMenuToggle(prevState => !prevState)
     }
@@ -30,9 +35,9 @@ function Chat() {
                 {/*Chanel list*/}
                 <List mt={10}>
                     <Text color={"#aa05aa"} fontSize={"lg"} as={"b"}>Channels List</Text>
-                    {channels.map(chanel => (
-                        <ListItem style={{cursor: "pointer", marginBlock: 4}}>
-                            <span style={{fontWeight: "bold", fontSize: "large"}}># </span>{chanel}
+                    {channels && channels.map(({name, type}) => (
+                        <ListItem style={{cursor: "pointer", marginBlock: 4}} key={`${name}-${type}`}>
+                            <span style={{fontWeight: "bold", fontSize: "large"}}># </span>{name}
                         </ListItem>
                     ))}
                 </List>
