@@ -1,9 +1,10 @@
-import React, {FormEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useState} from 'react';
 import styles from "@/styles/Login.module.css";
 import {CircularProgress} from "@chakra-ui/react";
 import {Inter} from "next/font/google";
-import UserApi, {AuthUser} from "@/services/user-api";
+import {AuthUser} from "@/services/user-api";
 import {useStore} from "@/store/root-store";
+import {delay} from "@/utils/timing";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -17,16 +18,15 @@ function Login() {
         setIsLoading(true)
         e.preventDefault();
         try {
-            await logIn({...authInfos});
-        }catch (e) {
-            console.log(e.message)
-        }finally {
-            setIsLoading(false)
+            logIn({...authInfos});
+        } catch (error) {
+            console.log(e)
         }
+        setIsLoading(false)
     };
 
     function handleInputChange<T>(originalFlatObj: T, attribute: keyof T) {
-        return (event) => setAuthInfos({
+        return (event: ChangeEvent<HTMLInputElement>) => setAuthInfos({
             ...originalFlatObj,
             [attribute]: event.target.value
         });

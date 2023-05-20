@@ -10,7 +10,7 @@ export type AuthUser = {
 class UserApi {
     async logIn(userDetails: AuthUser) {
         const {data} = await api.post<User>("/users/login", userDetails);
-        return data["user"] as User;
+        return data?.user as User;
     }
 
     signUp() {

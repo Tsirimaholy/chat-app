@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useLayoutEffect} from 'react';
 import {useRouter} from "next/navigation";
 import {HOME_ROUTE, LOGIN} from "@/constant/routes";
 import {useStore} from "@/store/root-store";
@@ -13,7 +13,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
     const {user} = useStore();
 
     useEffect(() => {
-        user.id ? push(HOME_ROUTE) : push(LOGIN);
+        user?.id ? push(HOME_ROUTE) : push(LOGIN);
     }, [user])
 
     return (

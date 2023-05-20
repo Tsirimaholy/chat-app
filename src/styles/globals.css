@@ -2,9 +2,19 @@
     --primary-color: #262633;
     --secondary-color: #2e2e3c;
     --back-ground-color: #242731;
+    --secondary-dark-color: #25252D;
+    --secondary-dark-lighter-color: #2B2B37;
 }
 
 body{
     color: white;
     background-color: var(--back-ground-color);
+}
+
+input{
+    background-color: var(--secondary-dark-color);
+}
+
+input:hover {
+    background-color: var(--secondary-dark-lighter-color);
 }

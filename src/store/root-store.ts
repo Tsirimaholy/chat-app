@@ -13,24 +13,25 @@ type Action = {
     logout: () => void
 }
 
+const DEFAULT_USER = {
+    id: null,
+    name: "",
+    bio: "",
+    email: "",
+    mail: ""
+};
 export const useStore = create<State & Action>(persist((set) => ({
-    user: {
-        id: null,
-        name: "",
-        bio: "",
-        email: "",
-        mail: ""
-    },
+    user: DEFAULT_USER,
     logIn: async (authInfos) => {
         try {
             const user = await UserApi.logIn(authInfos);
             set((state) => ({...state, user}));
         } catch (e) {
-            console.error(e.message);
+            console.log(e.message);
             throw e;
         }
     },
-    logout: () => set(() => ({user: {username: "", password: ""}}))
+    logout: () => set(() => ({user: DEFAULT_USER}))
 }), {
     name: AUTH_INFOS,
 }))
