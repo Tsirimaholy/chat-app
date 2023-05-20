@@ -1,26 +1,29 @@
 import React, {FormEvent, useState} from 'react';
 import styles from "@/styles/Login.module.css";
 import {CircularProgress} from "@chakra-ui/react";
-import {delay} from "@/utils/timing";
 import {Inter} from "next/font/google";
-import {AuthInfos} from "@/models/Auth";
-import {useStore} from "@/store/root-store"
+import UserApi, {AuthUser} from "@/services/user-api";
+import {useStore} from "@/store/root-store";
 
 const inter = Inter({subsets: ['latin']})
 
 
 function Login() {
-    const [authInfos, setAuthInfos] = useState<AuthInfos>(null);
+    const [authInfos, setAuthInfos] = useState<AuthUser>(null);
     const [loading, setIsLoading] = useState(false);
-    const {updateAuthInfos} = useStore();
+    const {logIn} = useStore();
 
-    async function handleSubmit(e: FormEvent) {
+    const handleSubmit = async (e: FormEvent) => {
         setIsLoading(true)
         e.preventDefault();
-        updateAuthInfos({...authInfos});
-        await delay(2000)
-        setIsLoading(false);
-    }
+        try {
+            await logIn({...authInfos});
+        }catch (e) {
+            console.log(e.message)
+        }finally {
+            setIsLoading(false)
+        }
+    };
 
     function handleInputChange<T>(originalFlatObj: T, attribute: keyof T) {
         return (event) => setAuthInfos({
@@ -35,9 +38,9 @@ function Login() {
                 {loading && <CircularProgress value={30} color='orange' thickness='12px' isIndeterminate={true}
                                               position={"absolute"}/>}
                 <label>
-                    <input type={"text"} name={"username"}
+                    <input type={"text"} name={"email"}
                            className={`${styles.wrapper__input}`}
-                           onChange={handleInputChange<AuthInfos>(authInfos, "username")}
+                           onChange={handleInputChange<AuthUser>(authInfos, "email")}
                            placeholder={"Username or Email"}
                     />
                 </label>

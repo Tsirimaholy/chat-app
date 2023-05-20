@@ -4,7 +4,6 @@ import {Box, List, ListItem, Text} from "@chakra-ui/react";
 import {AddIcon} from "@chakra-ui/icons";
 import {NavBar} from "@/components/core/nav-bar";
 
-
 function Chat() {
     const {user, logout} = useStore()
     const [menuToggle, setMenuToggle] = useState(false);

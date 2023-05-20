@@ -13,7 +13,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
     const {user} = useStore();
 
     useEffect(() => {
-        user.username ? push(HOME_ROUTE) : push(LOGIN);
+        user.id ? push(HOME_ROUTE) : push(LOGIN);
     }, [user])
 
     return (
