@@ -1,6 +1,5 @@
 import api from "@/services/api";
 import {User} from "@/models/Auth";
-import {AxiosResponse} from "axios";
 
 export type AuthUser = {
     email: string;
@@ -12,17 +11,21 @@ class UserApi {
         const {data} = await api.post<User>("/users/login", userDetails);
         const user = data?.user as User;
         // JWT intercept
-        api.interceptors.request.use((config) => {
-            config.headers.Authorization = "JWT " + user.token;
-            return config;
-        })
-
+        this.setUpJWT(user.token);
         return user;
     }
 
-    signUp() {
-        const request = api.post("/users");
+    async signUp() {
+        const request = await api.post("/users");
         return {request}
+    }
+
+    setUpJWT(token: string) {
+        console.info("Running interceptors")
+        api.interceptors.request.use((config) => {
+            config.headers.Authorization = "JWT " + token;
+            return config;
+        })
     }
 }
 
