@@ -1,7 +1,8 @@
-import {AuthInfos, User} from "@/models/Auth";
+import {User} from "@/models/Auth";
 import React, {FC} from "react";
 import styles from "./Navbar.module.css";
-import {Avatar, Badge, Box, Text} from "@chakra-ui/react";
+import {Avatar, Badge, Box, HStack, Text} from "@chakra-ui/react";
+import ColorModeSwitch from "@/components/common/ColorModeSwitch";
 
 interface NavBarProps {
     onClick: () => void;
@@ -12,11 +13,12 @@ interface NavBarProps {
 
 export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onClick, user}) => {
     return (
-        <nav className={styles.main_nav}>
-            <div className={".right__nav"}>
-
-            </div>
-            <div>
+        <HStack justifyContent={"space-between"} paddingInline={5} paddingBlock={1} mb={2}>
+            <Text as={"b"} fontSize={"larger"}>
+                Sleek
+            </Text>
+            <HStack>
+                <ColorModeSwitch/>
                 <div className={styles.avatar_wrapper}
                      onClick={onClick}
                      onBlur={onClick}
@@ -27,7 +29,7 @@ export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onCli
                             colorScheme={"blackAlpha"}
                             color={"white"}
                     />
-                    <Text color={"white"} as="b">{`@${user.name}`}</Text>
+                    <Text as="b">{`@${user.name}`}</Text>
                     {menuToggle && <div className={styles.menu}>
                         <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
                             <Badge borderRadius="full" px="2" colorScheme="teal" onClick={onBadgeClicked}>
@@ -37,6 +39,6 @@ export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onCli
                     </div>}
 
                 </div>
-            </div>
-        </nav>);
+            </HStack>
+        </HStack>);
 };
