@@ -18,9 +18,9 @@ import {
     useDisclosure
 } from "@chakra-ui/react";
 import {AddIcon} from "@chakra-ui/icons";
-import {NavBar} from "@/components/core/nav-bar";
+import {NavBar} from "@/components/core/nav-bar/nav-bar";
 import {useChannelStore} from "@/store/channel-store";
-import {ChannelList} from "@/components/core/channels-list";
+import {ChannelList} from "@/components/core/channel/channels-list";
 import {delay} from "@/utils/timing";
 
 function Chat() {

@@ -1,6 +1,6 @@
 import {Channel} from "@/models/Channel";
 import {Box, List, Text} from "@chakra-ui/react";
-import {ChannelItem} from "@/components/core/channelItem";
+import {ChannelItem} from "@/components/core/channel/channelItem";
 import React from "react";
 
 type ChannelsListProps = {
