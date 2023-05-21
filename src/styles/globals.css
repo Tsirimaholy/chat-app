@@ -2,10 +2,13 @@
     --primary-color: #262633;
     --secondary-color: #2e2e3c;
     --back-ground-color: #242731;
-    --secondary-dark-color: #25252D;
-    --secondary-dark-lighter-color: #2B2B37;
+    --secondary-dark-color: #1a202c;
+    --back-ground-classic-dark:#121722;
+    --secondary-dark-lighter-color: #1d273c;
 }
-
+*{
+    color: white;
+}
 body{
     color: white;
     background-color: var(--back-ground-color);
