@@ -16,6 +16,6 @@ export const useChannelStore = create<State & Action>(persist(setState => ({
     channels: [],
     getChannels: async () => {
         const channels = await ChannelApi.getAll();
-        setState(() => channels);
+        setState(() => ({channels}));
     }
 }), {name: CHANNELS_STORAGE}));
