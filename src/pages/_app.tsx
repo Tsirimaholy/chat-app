@@ -6,6 +6,8 @@ import "font-awesome/css/font-awesome.min.css"
 import {useEffect} from "react";
 import UserApi from "@/services/user-api";
 import {useStore} from "@/store/root-store";
+import theme from "@/theme/theme";
+import {ColorModeScript} from "@chakra-ui/react";
 
 
 export default function App({Component, pageProps}: AppProps) {
@@ -20,7 +22,8 @@ export default function App({Component, pageProps}: AppProps) {
 
 
     return (
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
             <ProtectedRoute>
                 <Component {...pageProps} />
             </ProtectedRoute>
