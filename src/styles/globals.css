@@ -3,14 +3,12 @@
     --secondary-color: #2e2e3c;
     --back-ground-color: #242731;
     --secondary-dark-color: #1a202c;
+    --primary-dark-color: #1c2433;
     --back-ground-classic-dark:#121722;
     --secondary-dark-lighter-color: #1d273c;
 }
-*{
-    color: white;
-}
+
 body{
-    color: white;
     background-color: var(--back-ground-color);
 }
 

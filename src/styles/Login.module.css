@@ -7,7 +7,7 @@
   min-height: 100vh;
 }
 .wrapper{
-  // TODO use global style
+  /*TODO use global style*/
   background-color: #121722;
   padding: 2rem 5em;
   border-radius: 2%;

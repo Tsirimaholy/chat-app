@@ -10,7 +10,7 @@ const inter = Inter({subsets: ['latin']})
 
 
 function Login() {
-    const [authInfos, setAuthInfos] = useState<AuthUser>(null);
+    const [authInfos, setAuthInfos] = useState<AuthUser>({email: "", password: ""});
     const [loading, setIsLoading] = useState(false);
     const {logIn} = useStore();
 
@@ -18,14 +18,14 @@ function Login() {
         setIsLoading(true)
         e.preventDefault();
         try {
-            logIn({...authInfos});
+            await logIn({...authInfos});
         } catch (error) {
-            console.log(e)
+            console.log(e);
         }
         setIsLoading(false)
     };
 
-    function handleInputChange<T>(originalFlatObj: T, attribute: keyof T) {
+    function handleInputChange<T extends AuthUser>(originalFlatObj: T, attribute: keyof T) {
         return (event: ChangeEvent<HTMLInputElement>) => setAuthInfos({
             ...originalFlatObj,
             [attribute]: event.target.value

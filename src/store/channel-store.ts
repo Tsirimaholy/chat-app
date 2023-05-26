@@ -9,19 +9,25 @@ type State = {
 }
 
 type Action = {
-    getChannels: () => State["channels"];
-    createChannel: (channel: Channel) => Channel;
+    getChannels: () => Promise<State["channels"]>;
+    createChannel: (channel: Channel) => Promise<Channel>;
 }
 
-export const useChannelStore = create<State & Action>(persist((setState, get) => ({
+export const useChannelStore = create<State & Action>()(persist((setState, get) => ({
     channels: [],
     getChannels: async () => {
         const channels = await ChannelApi.getAll();
         setState(() => ({channels}));
+        return get().channels;
     },
     createChannel: async (channel: Channel) => {
-        const createdChannel = await ChannelApi.createChannel(channel);
-        get().getChannels();
-        return createdChannel;
+        try {
+            const createdChannel = await ChannelApi.createChannel(channel);
+            await get().getChannels();
+            return createdChannel;
+        } catch (e) {
+            console.info("caught on store layer");
+            throw e;
+        }
     }
 }), {name: CHANNELS_STORAGE}));

@@ -13,26 +13,20 @@ type Action = {
     logout: () => void
 }
 
-const DEFAULT_USER = {
-    id: null,
+const DEFAULT_USER: User = {
+    id: -1,
     name: "",
     bio: "",
     email: "",
-    mail: ""
+    mail: "",
+    token: ""
 };
-export const useStore = create<State & Action>(persist((set) => ({
+export const useStore = create<State & Action>()(persist((set, get) => ({
     user: DEFAULT_USER,
     logIn: async (authInfos) => {
-        try {
-            const user = await UserApi.logIn(authInfos);
-            set((state) => ({...state, user}));
-        } catch (e) {
-            console.log(e.message);
-            throw e;
-        }
+        const user = await UserApi.logIn(authInfos);
+        set((state) => ({...state, user}));
     },
     logout: () => set(() => ({user: DEFAULT_USER}))
-}), {
-    name: AUTH_INFOS,
-}))
+}), {name: AUTH_INFOS}))
 

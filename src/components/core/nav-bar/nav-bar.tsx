@@ -13,7 +13,7 @@ interface NavBarProps {
 
 export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onClick, user}) => {
     return (
-        <HStack justifyContent={"space-between"} paddingInline={5} paddingBlock={1} mb={2}>
+        <HStack justifyContent={"space-between"} paddingInline={5} paddingBlock={1} mb={2} bg={"var(--primary-dark-color)"}>
             <Text as={"b"} fontSize={"larger"}>
                 Sleek
             </Text>
