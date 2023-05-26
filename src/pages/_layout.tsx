@@ -14,13 +14,15 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    Spinner, useDisclosure
+    Spinner, Text, useDisclosure
 } from "@chakra-ui/react";
 import {NavBar} from "@/components/core/nav-bar/nav-bar";
 import {AddIcon} from "@chakra-ui/icons";
 import {ChannelList} from "@/components/core/channel/channels-list";
 import {useChannelStore} from "@/store/channel-store";
 import {useStore} from "@/store/root-store";
+import useMessageStore from "@/store/message-store";
+import {Channel} from "@/models/Channel";
 
 
 type LayoutProps = {
@@ -31,6 +33,7 @@ function Layout({children}: LayoutProps): JSX.Element {
     const [channelsLoading, setChannelsLoading] = useState(false);
     const [menuToggle, setMenuToggle] = useState(false);
     const {channels, getChannels, createChannel} = useChannelStore();
+    const {messages, getMessagesByChannel} = useMessageStore();
     const {user, logout} = useStore()
     const [isSavingChannel, setIsSavingChannel] = useState(false);
     const initialRef = React.useRef(null)
@@ -44,6 +47,7 @@ function Layout({children}: LayoutProps): JSX.Element {
         setIsSavingChannel(true)
         try {
             await createChannel({
+                id: 0,
                 name: nameRef.current?.value || "",
                 type: typeRef.current?.value || ""
             })
@@ -76,6 +80,11 @@ function Layout({children}: LayoutProps): JSX.Element {
         toggle();
         logout()
     }
+
+    const onChannelItemClicked = async (channel: Channel) => {
+            await getMessagesByChannel(channel.id);
+    }
+
     return (
         <Grid templateAreas={`"nav nav" "aside main"`}>
             <GridItem area={"nav"}>
@@ -127,7 +136,14 @@ function Layout({children}: LayoutProps): JSX.Element {
                         Create chanel
                     </Button>
                 </Box>
-                {channelsLoading ? <Spinner display={"block"} mt={5}/> : <ChannelList channels={channels}/>}
+                <Box>
+                    <Box>
+                        <Text color={"#aa05aa"} fontSize={"lg"} as={"b"}>Channels List</Text>
+                    </Box>
+                    {channelsLoading ? <Spinner display={"block"} mt={5}/> :
+                        <ChannelList channels={channels} selectedChannel={undefined}
+                                     onItemClicked={onChannelItemClicked}/>}
+                </Box>
             </GridItem>
             {children}
         </Grid>
