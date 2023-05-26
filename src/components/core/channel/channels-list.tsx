@@ -1,19 +1,19 @@
 import {Channel} from "@/models/Channel";
 import {Box, List, Text} from "@chakra-ui/react";
 import {ChannelItem} from "@/components/core/channel/channelItem";
-import React from "react";
+import React, {useState} from "react";
 
 type ChannelsListProps = {
-    channels: Channel[]
+    channels: Channel[];
+    selectedChannel?: Channel;
+    onItemClicked: (channel: Channel)=>void
 }
 
-export function ChannelList({channels}: ChannelsListProps) {
+export function ChannelList({channels, onItemClicked}: ChannelsListProps) {
+    const [selectedChannel, setSelectedChannel] = useState<Channel | undefined>(undefined);
     return (
         <List mt={5}>
-            <Box>
-                <Text color={"#aa05aa"} fontSize={"lg"} as={"b"}>Channels List</Text>
-            </Box>
-            {channels.map(channel => <ChannelItem name={channel.name}/>)}
+            {channels.map(channel => <ChannelItem name={channel.name} key={channel.name} channel={channel} onClick={onItemClicked} isActive={channel===selectedChannel}/>)}
         </List>
     )
 }
