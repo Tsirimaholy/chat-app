@@ -19,3 +19,5 @@ export interface UserProfile extends User{
     updatedAt: string;
     deletedAt?: string;
 }
+
+export type Sender = Pick<UserProfile, "id"|"name"|"email">
