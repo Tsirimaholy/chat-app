@@ -1,6 +1,6 @@
-import React, {FC, useEffect, useLayoutEffect} from 'react';
-import {useRouter} from "next/navigation";
-import {HOME_ROUTE, LOGIN} from "@/constant/routes";
+import React, {FC, useEffect} from 'react';
+import {usePathname, useRouter} from "next/navigation";
+import {HOME_ROUTE, LOGIN, ROOT_ROUTE} from "@/constant/routes";
 import {useStore} from "@/store/root-store";
 
 
@@ -10,11 +10,20 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
     const {push} = useRouter();
+    const currentPath = usePathname();
     const {user} = useStore();
 
     useEffect(() => {
-        user?.id && user.token ? push(HOME_ROUTE) : push(LOGIN);
-    }, [user])
+        const isAuthenticated = !!(user?.id && user.token);
+        if (!isAuthenticated) {
+            push(LOGIN);
+            return;
+        }
+        if (isAuthenticated) {
+            // Do not show login page anymore if already authenticated
+            if (currentPath == LOGIN || currentPath == ROOT_ROUTE) push(HOME_ROUTE);
+        }
+    }, [currentPath, push, user])
 
     return (
         <>

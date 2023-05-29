@@ -18,7 +18,7 @@ export default function App({Component, pageProps}: AppProps) {
             // We call it directly there
             await UserApi.setUpJWT(token);
         })()
-    }, [])
+    }, [token])
 
 
     return (

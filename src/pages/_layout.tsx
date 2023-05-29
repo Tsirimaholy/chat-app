@@ -90,44 +90,8 @@ function Layout({children}: LayoutProps): JSX.Element {
             <GridItem area={"nav"}>
                 <NavBar onClick={toggle} user={user} menuToggle={menuToggle} onBadgeClicked={handleLogout}/>
             </GridItem>
-            <GridItem area={"aside"} paddingInline={5} mr="5" borderRight={"1px solid var(--secondary-color)"}
-                      h={"100vh"} overflowY={"scroll"} position={"relative"}>
-                <>
-                    <Modal
-                        initialFocusRef={initialRef}
-                        finalFocusRef={finalRef}
-                        isOpen={isOpen}
-                        onClose={onClose}
-                    >
-                        <ModalOverlay/>
-                        <ModalContent>
-                            <ModalHeader>Create a channel</ModalHeader>
-                            <ModalCloseButton/>
-                            <ModalBody pb={6}>
-                                <FormControl>
-                                    <FormLabel>Name</FormLabel>
-                                    <Input ref={nameRef} placeholder='channel name'/>
-                                </FormControl>
-
-                                <FormControl mt={4}>
-                                    <FormLabel>Type</FormLabel>
-                                    <Input ref={typeRef} placeholder='public or private'/>
-                                </FormControl>
-                            </ModalBody>
-
-                            <ModalFooter>
-                                <Button mr={3} colorScheme={"blue"}
-                                        onClick={handleSaveChannel}
-                                        rightIcon={isSavingChannel ? <Spinner/> : <></>}
-                                >Save</Button>
-                                <Button>
-                                    Cancel
-                                </Button>
-
-                            </ModalFooter>
-                        </ModalContent>
-                    </Modal>
-                </>
+            <GridItem  area={"aside"} paddingInline={5} mr="5" borderRight={"1px solid var(--secondary-color)"}
+                      h={"100vh"}  overflowY={"scroll"} position={"relative"}>
                 <Box position={"sticky"} top={0} left={0} right={0} zIndex={999}
                      backgroundColor={"var(--secondary-dark-color)"} pb={"4"}
                      borderBottom={"1px solid var(--secondary-color)"}
@@ -145,7 +109,43 @@ function Layout({children}: LayoutProps): JSX.Element {
                                      onItemClicked={onChannelItemClicked}/>}
                 </Box>
             </GridItem>
-            {children}
+            <GridItem area={'main'}>
+                <Modal
+                    initialFocusRef={initialRef}
+                    finalFocusRef={finalRef}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                >
+                    <ModalOverlay/>
+                    <ModalContent>
+                        <ModalHeader>Create a channel</ModalHeader>
+                        <ModalCloseButton/>
+                        <ModalBody pb={6}>
+                            <FormControl>
+                                <FormLabel>Name</FormLabel>
+                                <Input ref={nameRef} placeholder='channel name'/>
+                            </FormControl>
+
+                            <FormControl mt={4}>
+                                <FormLabel>Type</FormLabel>
+                                <Input ref={typeRef} placeholder='public or private'/>
+                            </FormControl>
+                        </ModalBody>
+
+                        <ModalFooter>
+                            <Button mr={3} colorScheme={"blue"}
+                                    onClick={handleSaveChannel}
+                                    rightIcon={isSavingChannel ? <Spinner/> : <></>}
+                            >Save</Button>
+                            <Button>
+                                Cancel
+                            </Button>
+
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
+                {children}
+            </GridItem>
         </Grid>
     );
 }
