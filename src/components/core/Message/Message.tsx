@@ -5,14 +5,13 @@ import {TMessage} from "@/models/TMessage";
 type MessageProps = { alignSelf: "left" | "right", message: TMessage };
 
 export function Message(props: MessageProps) {
-    const {alignSelf, message: {content}} = props;
+    const {alignSelf, message: {content, sender}} = props;
     const radius = alignSelf === 'left' ? "0 2em 2em 2em" : "2em 0 2em 2em";
     return (
         <HStack alignSelf={alignSelf}
                 flexDirection={alignSelf == "left" ? "row" : "row-reverse"}>
-            <Avatar size={"2xs"} name={`John`} src={"/assets/icon/user-avatar.png"}
-                    width={35}
-                    height={35}
+            <Avatar size={"md"} name={sender.name}
+                    bg={'gray.600'}
                     colorScheme={"blackAlpha"}
                     color={"white"}
                     float={alignSelf}
