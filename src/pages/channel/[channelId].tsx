@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import Layout from "@/pages/_layout";
 import {useRouter} from "next/router";
-import {List, ListItem} from "@chakra-ui/react";
 import useMessageStore from "@/store/message-store";
+import {MessageList} from "@/components/core/Message/message-list";
 
 function ChannelMessages() {
     const {query} = useRouter();
@@ -16,13 +16,7 @@ function ChannelMessages() {
 
     return (
         <Layout>
-            <List>
-                {messages.map(message => (
-                    <ListItem key={message.id}>
-                        {message.content}
-                    </ListItem>
-                ))}
-            </List>
+            <MessageList messages={messages}/>
         </Layout>
     );
 }
