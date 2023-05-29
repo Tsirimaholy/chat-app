@@ -13,6 +13,7 @@ type SideBarProps = {
 
 export function SideBar(props: SideBarProps) {
     const {channels, channelsLoading, onClick, onItemClicked} = props;
+
     return <>
         <Box position={"sticky"} top={0} left={0} right={0} zIndex={999}
              backgroundColor={"var(--secondary-dark-color)"} pb={"4"}
@@ -27,7 +28,7 @@ export function SideBar(props: SideBarProps) {
                 <Text color={"#aa05aa"} fontSize={"lg"} as={"b"}>Channels List</Text>
             </Box>
             {channelsLoading ? <Spinner display={"block"} mt={5}/> :
-                <ChannelList channels={channels} selectedChannel={undefined}
+                <ChannelList channels={channels} selectedChannel={channels.length>0 ? channels[0]: undefined}
                              onItemClicked={onItemClicked}/>}
         </Box>
     </>;
