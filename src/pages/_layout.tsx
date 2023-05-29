@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
-    Box,
     Button,
     FormControl,
     FormLabel,
@@ -14,17 +13,17 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    Spinner, Text, useDisclosure
+    Spinner,
+    useDisclosure
 } from "@chakra-ui/react";
 import {NavBar} from "@/components/core/nav-bar/nav-bar";
-import {AddIcon} from "@chakra-ui/icons";
-import {ChannelList} from "@/components/core/channel/channels-list";
 import {useChannelStore} from "@/store/channel-store";
 import {useStore} from "@/store/root-store";
 import useMessageStore from "@/store/message-store";
 import {Channel} from "@/models/Channel";
 import {useRouter} from "next/navigation";
 import {CHANNEL} from "@/constant/routes";
+import {SideBar} from "@/components/core/side-bar";
 
 
 type LayoutProps = {
@@ -96,22 +95,8 @@ function Layout({children}: LayoutProps): JSX.Element {
             </GridItem>
             <GridItem area={"aside"} paddingInline={5} mr="5" borderRight={"1px solid var(--secondary-color)"}
                       h={"100vh"} overflowY={"scroll"} position={"relative"}>
-                <Box position={"sticky"} top={0} left={0} right={0} zIndex={999}
-                     backgroundColor={"var(--secondary-dark-color)"} pb={"4"}
-                     borderBottom={"1px solid var(--secondary-color)"}
-                >
-                    <Button onClick={onOpen} rightIcon={<AddIcon boxSize={3}/>}>
-                        Create chanel
-                    </Button>
-                </Box>
-                <Box>
-                    <Box>
-                        <Text color={"#aa05aa"} fontSize={"lg"} as={"b"}>Channels List</Text>
-                    </Box>
-                    {channelsLoading ? <Spinner display={"block"} mt={5}/> :
-                        <ChannelList channels={channels} selectedChannel={undefined}
-                                     onItemClicked={onChannelItemClicked}/>}
-                </Box>
+                <SideBar onClick={onOpen} channelsLoading={channelsLoading} channels={channels}
+                         onItemClicked={onChannelItemClicked}/>
             </GridItem>
             <GridItem area={'main'}>
                 <Modal
