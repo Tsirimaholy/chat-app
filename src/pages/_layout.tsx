@@ -23,6 +23,8 @@ import {useChannelStore} from "@/store/channel-store";
 import {useStore} from "@/store/root-store";
 import useMessageStore from "@/store/message-store";
 import {Channel} from "@/models/Channel";
+import {useRouter} from "next/navigation";
+import {CHANNEL} from "@/constant/routes";
 
 
 type LayoutProps = {
@@ -42,6 +44,7 @@ function Layout({children}: LayoutProps): JSX.Element {
 
     const finalRef = React.useRef(null)
     const {onOpen, isOpen, onClose} = useDisclosure();
+    const {push} = useRouter()
 
     async function handleSaveChannel() {
         setIsSavingChannel(true)
@@ -82,16 +85,17 @@ function Layout({children}: LayoutProps): JSX.Element {
     }
 
     const onChannelItemClicked = async (channel: Channel) => {
-            await getMessagesByChannel(channel.id);
+        // await getMessagesByChannel(channel.id);
+        push(`${CHANNEL}/${channel.id}`)
     }
 
     return (
-        <Grid templateAreas={`"nav nav" "aside main"`}>
+        <Grid templateAreas={`"nav nav" "aside main"`} gridAutoColumns={'20% 1fr'}>
             <GridItem area={"nav"}>
                 <NavBar onClick={toggle} user={user} menuToggle={menuToggle} onBadgeClicked={handleLogout}/>
             </GridItem>
-            <GridItem  area={"aside"} paddingInline={5} mr="5" borderRight={"1px solid var(--secondary-color)"}
-                      h={"100vh"}  overflowY={"scroll"} position={"relative"}>
+            <GridItem area={"aside"} paddingInline={5} mr="5" borderRight={"1px solid var(--secondary-color)"}
+                      h={"100vh"} overflowY={"scroll"} position={"relative"}>
                 <Box position={"sticky"} top={0} left={0} right={0} zIndex={999}
                      backgroundColor={"var(--secondary-dark-color)"} pb={"4"}
                      borderBottom={"1px solid var(--secondary-color)"}
