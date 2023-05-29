@@ -15,7 +15,10 @@ class ChannelApi {
         }
     }
 
-
+    async updateChannel(id: number):Promise<Channel>{
+        // Todo implement channel name update
+         throw new Error("Not implemented");
+    }
 
     async getChannelById(id: number) {
         try {
