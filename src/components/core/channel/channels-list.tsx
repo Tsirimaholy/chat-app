@@ -9,11 +9,16 @@ type ChannelsListProps = {
     onItemClicked: (channel: Channel)=>void
 }
 
-export function ChannelList({channels, onItemClicked}: ChannelsListProps) {
-    const [selectedChannel, setSelectedChannel] = useState<Channel | undefined>(undefined);
+export function ChannelList({channels, onItemClicked, selectedChannel: initialChannel}: ChannelsListProps) {
+    const [selectedChannel, setSelectedChannel] = useState<Channel | undefined>(initialChannel);
+    const handleChannelItemClick = (channel: Channel)=>{
+        setSelectedChannel(channel);
+        onItemClicked(channel);
+    }
+
     return (
         <List mt={5}>
-            {channels.map(channel => <ChannelItem name={channel.name} key={channel.name} channel={channel} onClick={onItemClicked} isActive={channel===selectedChannel}/>)}
+            {channels.map(channel => <ChannelItem name={channel.name} key={channel.name} channel={channel} onClick={handleChannelItemClick} isActive={channel.id===selectedChannel?.id}/>)}
         </List>
     )
 }
