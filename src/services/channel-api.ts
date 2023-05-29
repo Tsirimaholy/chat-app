@@ -15,6 +15,20 @@ class ChannelApi {
         }
     }
 
+
+
+    async getChannelById(id: number) {
+        try {
+            const {data} = await api.get(`/channel/${id}`);
+            return data?.channel as Channel;
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                console.log(e.message)
+            }
+            throw e;
+        }
+    }
+
     async createChannel(channel: Channel) {
         try {
             const {data} = await api.post("/channel", {...channel, members: []});

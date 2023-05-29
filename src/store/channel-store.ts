@@ -10,6 +10,7 @@ type State = {
 
 type Action = {
     getChannels: () => Promise<State["channels"]>;
+    getChannelById: (id: number)=>Promise<Channel>;
     createChannel: (channel: Channel) => Promise<Channel>;
 }
 
@@ -19,6 +20,9 @@ export const useChannelStore = create<State & Action>()(persist((setState, get) 
         const channels = await ChannelApi.getAll();
         setState(() => ({channels}));
         return get().channels;
+    },
+    getChannelById: async (id: number)=>{
+        return await ChannelApi.getChannelById(id);
     },
     createChannel: async (channel: Channel) => {
         try {
