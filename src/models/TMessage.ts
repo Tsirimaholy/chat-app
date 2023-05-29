@@ -1,6 +1,6 @@
 import {Sender} from "@/models/Auth";
 
-export type Message = {
+export type TMessage = {
     "id": number,
     "content": string,
     "createdAt": string,
