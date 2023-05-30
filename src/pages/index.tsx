@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import {useState} from "react";
 import {CircularProgress} from "@chakra-ui/react";
-import {wrapper} from "@/styles/Home.module.css";
 
 
 export default function Home() {
@@ -14,7 +13,7 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <main className={`${wrapper}`}>
+            <main >
                 {isLoading && <CircularProgress value={30} color='orange' thickness='12px' isIndeterminate={true}/>}
             </main>
         </>
