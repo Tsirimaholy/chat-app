@@ -9,8 +9,8 @@ export function MessageList(props: MessageListProps) {
     const {messages} = props;
 
     return (
-        <List display={"flex"} flexDirection={"column"}>
-            {messages.map((message, index) => {
+        <List display={"flex"} flexDirection={"column"} overflowY={"scroll"} h={"60%"}>
+            {messages.sort((a, b) => a.id-b.id).map((message, index) => {
                 // TODO: something is wrong here!
                 let align: "left" | "right" = index / 2 == 0 ? 'left' : 'right';
                 return (
