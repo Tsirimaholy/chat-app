@@ -98,7 +98,7 @@ function Layout({children}: LayoutProps): JSX.Element {
                 <SideBar onClick={onOpen} channelsLoading={channelsLoading} channels={channels}
                          onItemClicked={onChannelItemClicked}/>
             </GridItem>
-            <GridItem area={'main'}>
+            <GridItem area={'main'} pos={'relative'}>
                 <Modal
                     initialFocusRef={initialRef}
                     finalFocusRef={finalRef}

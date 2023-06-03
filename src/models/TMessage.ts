@@ -10,3 +10,4 @@ export type TMessage = {
     "channelId": number,
     "sender": Sender
 }
+export type CreateMessage = Pick<TMessage, "channelId" | "content" | "recipientId">;
