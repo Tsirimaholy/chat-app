@@ -1,4 +1,4 @@
-import {TMessage} from "@/models/TMessage";
+import {CreateMessage, TMessage} from "@/models/TMessage";
 import {create} from "zustand";
 import MessageApi from "@/services/message-api";
 
@@ -9,6 +9,7 @@ type State = {
 type Action = {
     getMessagesByUser: (id: number) => Promise<TMessage[]>;
     getMessagesByChannel: (id: number) => Promise<TMessage[]>;
+    sendMessage: (channelId: number, message: CreateMessage)=>Promise<void>;
 }
 
 const useMessageStore = create<State & Action>()((set) => ({
@@ -19,6 +20,14 @@ const useMessageStore = create<State & Action>()((set) => ({
             set(() => ({messages}));
             return messages;
         } catch (e) {
+            throw e;
+        }
+    },
+    sendMessage: async (channelId: number, message: CreateMessage)=>{
+        try {
+            await MessageApi.sendMessage(channelId, message);
+            await MessageApi.getMessageByChannel(channelId);
+        }catch (e) {
             throw e;
         }
     },

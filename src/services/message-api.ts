@@ -1,5 +1,5 @@
 import api from "@/services/api";
-import {TMessage} from "@/models/TMessage";
+import {CreateMessage, TMessage} from "@/models/TMessage";
 
 class MessageApi {
     async getAllMessageByUser(userId: number) {
@@ -11,11 +11,19 @@ class MessageApi {
         }
     }
 
-    async getMessageByChannel(channelId: number){
+    async sendMessage(channelId: number, message: CreateMessage) {
+        try {
+            await api.post("/message", {...message})
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getMessageByChannel(channelId: number) {
         try {
             const {data} = await api.get(`/messages/channel/${channelId}`);
             return data?.messages as TMessage[];
-        }catch (e) {
+        } catch (e) {
             throw e;
         }
     }
