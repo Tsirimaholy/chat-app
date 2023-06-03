@@ -5,13 +5,13 @@ import {Avatar, Badge, Box, HStack, Text} from "@chakra-ui/react";
 import ColorModeSwitch from "@/components/common/ColorModeSwitch";
 
 interface NavBarProps {
-    onClick: () => void;
+    onAvatarClicked: () => void;
     user: User;
     menuToggle: boolean;
     onBadgeClicked: () => void;
 }
 
-export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onClick, user}) => {
+export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onAvatarClicked, user}) => {
     return (
         <HStack justifyContent={"space-between"} paddingInline={5} paddingBlock={1} mb={2} bg={"var(--primary-dark-color)"}>
             <Text as={"b"} fontSize={"larger"}>
@@ -20,8 +20,8 @@ export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onCli
             <HStack>
                 <ColorModeSwitch/>
                 <div className={styles.avatar_wrapper}
-                     onClick={onClick}
-                     onBlur={onClick}
+                     onClick={onAvatarClicked}
+                     onBlur={onAvatarClicked}
                 >
                     <Avatar size={"2xs"} name={`${user.name}`} src={"/assets/icon/user-avatar.png"}
                             width={35}

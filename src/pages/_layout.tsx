@@ -91,7 +91,7 @@ function Layout({children}: LayoutProps): JSX.Element {
     return (
         <Grid templateAreas={`"nav nav" "aside main"`} gridAutoColumns={'20% 1fr'}>
             <GridItem area={"nav"}>
-                <NavBar onClick={toggle} user={user} menuToggle={menuToggle} onBadgeClicked={handleLogout}/>
+                <NavBar onAvatarClicked={toggle} user={user} menuToggle={menuToggle} onBadgeClicked={handleLogout}/>
             </GridItem>
             <GridItem area={"aside"} paddingInline={5} mr="5" borderRight={"1px solid var(--secondary-color)"}
                       h={"100vh"} overflowY={"scroll"} position={"relative"}>
