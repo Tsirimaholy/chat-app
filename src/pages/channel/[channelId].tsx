@@ -9,7 +9,6 @@ import {ChannelHeader} from "@/pages/channel/component/_ChannelHeading";
 import {MessageField} from "@/pages/channel/component/message-field";
 
 
-
 function ChannelMessages() {
     const {query} = useRouter();
     const id = Number.parseInt(query["channelId"] as unknown as string);
@@ -18,28 +17,35 @@ function ChannelMessages() {
     const {messages, getMessagesByChannel, sendMessage} = useMessageStore();
     const {getChannelById} = useChannelStore();
     const inputRef = useRef<HTMLInputElement>(null);
+
+
     useEffect(() => {
         (async () => {
             const [_, channel] = await Promise.all([getMessagesByChannel(id), getChannelById(id)]);
             setCurrentChannel(channel);
         })()
     }, [getChannelById, getMessagesByChannel, id])
+
     useEffect(() => {
         inputRef?.current?.focus();
     }, [id])
+
+
     const handleSendMessage = async (messageContent: string) => {
         await sendMessage(id, {recipientId: 1, channelId: id, content: messageContent});
         // clear input value
         if (inputRef?.current?.value) inputRef.current.value = "";
     }
 
+    async function handleKeyEnterDown(event: React.KeyboardEvent<HTMLInputElement> | undefined) {
+        if (event?.key == 'Enter' && inputRef?.current?.value) await handleSendMessage(inputRef.current.value)
+    }
+
     return (
         <Layout>
             <ChannelHeader currentChannel={currentChannel}/>
             <MessageList messages={messages}/>
-            <MessageField ref={inputRef} onKeyDown={async event => {
-                if (event?.key == 'Enter' && inputRef?.current?.value) await handleSendMessage(inputRef.current.value)
-            }}
+            <MessageField ref={inputRef} onKeyDown={handleKeyEnterDown}
                           onClick={() => handleSendMessage(inputRef?.current?.value || ' ')}/>
         </Layout>
     );
