@@ -1,3 +1,3 @@
-export const delay = (ms) => new Promise(resolve => {
+export const delay = (ms: number) => new Promise(resolve => {
     setTimeout(resolve, ms)
 })
