@@ -21,7 +21,7 @@ const DEFAULT_USER: User = {
     mail: "",
     token: ""
 };
-export const useStore = create<State & Action>()(persist((set, get) => ({
+export const useAuthStore = create<State & Action>()(persist((set, get) => ({
     user: DEFAULT_USER,
     logIn: async (authInfos) => {
         const user = await UserApi.logIn(authInfos);
