@@ -21,7 +21,7 @@ import {useChannelStore} from "@/store/channel-store";
 import {useAuthStore} from "@/store/auth-store";
 import {Channel} from "@/models/Channel";
 import {useRouter} from "next/navigation";
-import {CHANNEL} from "@/constant/routes";
+import {CHANNEL, PROFILE_ROUTE} from "@/constant/routes";
 import {SideBar} from "@/components/core/side-bar";
 
 
@@ -89,7 +89,7 @@ function Layout({children}: LayoutProps): JSX.Element {
     return (
         <Grid templateAreas={`"nav nav" "aside main"`} gridAutoColumns={'20% 1fr'}>
             <GridItem area={"nav"}>
-                <NavBar onAvatarClicked={toggle} user={user} menuToggle={menuToggle} onBadgeClicked={handleLogout}/>
+                <NavBar onAvatarClicked={()=>{push(PROFILE_ROUTE)}} user={user} menuToggle={menuToggle} onBadgeClicked={handleLogout}/>
             </GridItem>
             <GridItem area={"aside"} paddingInline={5} mr="5" borderRight={"1px solid var(--secondary-color)"}
                       h={"100vh"} overflowY={"scroll"} position={"relative"}>
