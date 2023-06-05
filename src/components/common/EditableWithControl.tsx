@@ -1,39 +1,65 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-    Box,
     ButtonGroup,
-    Editable as CHEditable,
+    Editable ,
     EditableInput,
     EditablePreview,
     IconButton,
+    Input,
+    Tooltip,
+    useColorModeValue,
     useEditableControls
 } from "@chakra-ui/react";
 import {CheckIcon, CloseIcon} from "@chakra-ui/icons";
 
-function EditableWithControl(props: {defaultValue?: string, onSubmit: (nextValue: string)=>void}) {
-    return (
-        <CHEditable defaultValue={props.defaultValue} onSubmit={props.onSubmit}>
-            <EditablePreview/>
-            <EditableInput/>
-           <EditableControl/>
-        </CHEditable>
-    );
+type EditableWithControlProps = {
+    defaultValue: string;
+    onSubmit: (nextValue: string)=>void;
 }
 
-function EditableControl() {
-    const {isEditing, getEditButtonProps, getSubmitButtonProps, getCancelButtonProps} = useEditableControls();
+
+function EditableControls() {
+    const {
+        isEditing,
+        getSubmitButtonProps,
+        getCancelButtonProps,
+        getEditButtonProps
+    } = useEditableControls();
+
+    return isEditing ? (
+        <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
+            <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
+            <IconButton
+                icon={<CloseIcon boxSize={3} />}
+                {...getCancelButtonProps()}
+            />
+        </ButtonGroup>
+    ) : null;
+}
+
+function EditableWithControl({defaultValue, onSubmit}: EditableWithControlProps) {
+    const [value, setValue]=useState(defaultValue);
     return (
-        isEditing ? (
-            <ButtonGroup>
-                <IconButton icon={<CheckIcon/>}  aria-label={'submit button'} {...getSubmitButtonProps()} colorScheme={'green'}/>
-                <IconButton icon={<CloseIcon/>}  aria-label={'cancel button'} {...getCancelButtonProps()} colorScheme={'red'}/>
-            </ButtonGroup>
-        ) : (
-            <Box {...getEditButtonProps()} display={'inline'} ml={'2'}>
-                <span className={"fa fa-pencil"} style={{cursor: "pointer"}}/>
-            </Box>
-        )
-    )
+        <Editable
+            isPreviewFocusable={true}
+            selectAllOnFocus={false}
+            onSubmit={onSubmit}
+            onChange={(nextValue: string)=>setValue(nextValue)}
+            value={value}
+        >
+            <Tooltip label="Click to edit" shouldWrapChildren={true}>
+                <EditablePreview
+                    py={2}
+                    px={4}
+                    _hover={{
+                        background: useColorModeValue("gray.100", "gray.700")
+                    }}
+                />
+            </Tooltip>
+            <Input py={2} px={4} as={EditableInput} />
+            <EditableControls />
+        </Editable>
+    );
 }
 
 
