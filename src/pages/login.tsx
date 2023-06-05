@@ -3,7 +3,7 @@ import styles from "@/styles/Login.module.css";
 import {CircularProgress} from "@chakra-ui/react";
 import {Inter} from "next/font/google";
 import {AuthUser} from "@/services/user-api";
-import {useStore} from "@/store/root-store";
+import {useAuthStore} from "@/store/auth-store";
 import {delay} from "@/utils/timing";
 
 const inter = Inter({subsets: ['latin']})
@@ -12,7 +12,7 @@ const inter = Inter({subsets: ['latin']})
 function Login() {
     const [authInfos, setAuthInfos] = useState<AuthUser>({email: "", password: ""});
     const [loading, setIsLoading] = useState(false);
-    const {logIn} = useStore();
+    const {logIn} = useAuthStore();
 
     const handleSubmit = async (e: FormEvent) => {
         setIsLoading(true)

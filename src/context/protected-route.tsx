@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import {usePathname, useRouter} from "next/navigation";
 import {HOME_ROUTE, LOGIN, ROOT_ROUTE} from "@/constant/routes";
-import {useStore} from "@/store/root-store";
+import {useAuthStore} from "@/store/auth-store";
 
 
 interface ProtectedRouteProps {
@@ -11,7 +11,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
     const {push} = useRouter();
     const currentPath = usePathname();
-    const {user} = useStore();
+    const {user} = useAuthStore();
 
     useEffect(() => {
         const isAuthenticated = !!(user?.id && user.token);

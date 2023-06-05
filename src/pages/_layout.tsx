@@ -18,8 +18,7 @@ import {
 } from "@chakra-ui/react";
 import {NavBar} from "@/components/core/nav-bar/nav-bar";
 import {useChannelStore} from "@/store/channel-store";
-import {useStore} from "@/store/root-store";
-import useMessageStore from "@/store/message-store";
+import {useAuthStore} from "@/store/auth-store";
 import {Channel} from "@/models/Channel";
 import {useRouter} from "next/navigation";
 import {CHANNEL} from "@/constant/routes";
@@ -34,8 +33,7 @@ function Layout({children}: LayoutProps): JSX.Element {
     const [channelsLoading, setChannelsLoading] = useState(false);
     const [menuToggle, setMenuToggle] = useState(false);
     const {channels, getChannels, createChannel} = useChannelStore();
-    const {messages, getMessagesByChannel} = useMessageStore();
-    const {user, logout} = useStore()
+    const {user, logout} = useAuthStore()
     const [isSavingChannel, setIsSavingChannel] = useState(false);
     const initialRef = React.useRef(null)
     const nameRef = useRef<HTMLInputElement>(null);
