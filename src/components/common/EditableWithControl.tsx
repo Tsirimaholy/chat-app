@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     ButtonGroup,
     Editable ,
@@ -28,7 +28,9 @@ function EditableControls() {
 
     return isEditing ? (
         <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
+            {/*@ts-ignore*/}
             <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
+            {/*@ts-ignore*/}
             <IconButton
                 icon={<CloseIcon boxSize={3} />}
                 {...getCancelButtonProps()}
@@ -39,6 +41,10 @@ function EditableControls() {
 
 function EditableWithControl({defaultValue, onSubmit}: EditableWithControlProps) {
     const [value, setValue]=useState(defaultValue);
+    useEffect(() =>  {
+        setValue(defaultValue);
+    }, [defaultValue])
+
     return (
         <Editable
             isPreviewFocusable={true}
