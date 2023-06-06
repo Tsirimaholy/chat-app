@@ -5,9 +5,17 @@ import {Box, Button, Grid, GridItem, HStack, Image, Text} from "@chakra-ui/react
 import {LockIcon, EditIcon} from "@chakra-ui/icons";
 import EditableWithControl from "@/components/common/EditableWithControl";
 import useStore from "@/store/use-store";
+import * as ROUTES from "@/constant/routes";
+import {useRouter} from "next/router";
 
-function Profile() {
+function Index() {
+    const {push} = useRouter();
     const user = useStore(useAuthStore, (state)=> state.user);
+    const {logout} = useAuthStore();
+    const handleLogout = () => {
+      logout();
+      push(ROUTES.LOGIN)
+    }
 
     return (
         <div>
@@ -35,7 +43,7 @@ function Profile() {
                         </Box>
                         <HStack flex={1} justifyContent={'end'} mt={'10'}>
                             <Button colorScheme='yellow' rightIcon={<EditIcon/>}>Edit Profile</Button>
-                            <Button colorScheme='red' rightIcon={<LockIcon/>}>Logout</Button>
+                            <Button colorScheme='red' rightIcon={<LockIcon/>} onClick={handleLogout}>Logout</Button>
                         </HStack>
                     </GridItem>
                 </Grid>
@@ -44,4 +52,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default Index;
