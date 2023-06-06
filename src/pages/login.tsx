@@ -2,9 +2,10 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import styles from "@/styles/Login.module.css";
 import {CircularProgress} from "@chakra-ui/react";
 import {Inter} from "next/font/google";
-import {AuthUser} from "@/services/user-api";
+import UserApi, {AuthUser} from "@/services/user-api";
 import {useAuthStore} from "@/store/auth-store";
-import {delay} from "@/utils/timing";
+import {useRouter} from "next/router";
+import {HOME_ROUTE} from "@/constant/routes";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -13,12 +14,16 @@ function Login() {
     const [authInfos, setAuthInfos] = useState<AuthUser>({email: "", password: ""});
     const [loading, setIsLoading] = useState(false);
     const {logIn} = useAuthStore();
+    const {user: {token}} = useAuthStore();
+    const {push}=useRouter();
 
     const handleSubmit = async (e: FormEvent) => {
         setIsLoading(true)
         e.preventDefault();
         try {
             await logIn({...authInfos});
+            await UserApi.setUpJWT(token);
+            await push(HOME_ROUTE);
         } catch (error) {
             console.log(e);
         }

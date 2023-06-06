@@ -9,7 +9,7 @@ type State = {
 }
 
 type Action = {
-    logIn: (authInfos: AuthUser) => void;
+    logIn: (authInfos: AuthUser) => Promise<void>;
     logout: () => void
 }
 
@@ -27,6 +27,9 @@ export const useAuthStore = create<State & Action>()(persist((set, get) => ({
         const user = await UserApi.logIn(authInfos);
         set((state) => ({...state, user}));
     },
-    logout: () => set(() => ({user: DEFAULT_USER}))
+    logout: () => {
+        localStorage.clear();
+        set(() => ({user: DEFAULT_USER}));
+    }
 }), {name: AUTH_INFOS}))
 

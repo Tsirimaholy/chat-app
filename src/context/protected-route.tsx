@@ -23,7 +23,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
             // Do not show login page anymore if already authenticated
             if (currentPath == LOGIN || currentPath == ROOT_ROUTE) push(HOME_ROUTE);
         }
-    }, [currentPath, push, user])
+    }, [currentPath])
 
     return (
         <>
