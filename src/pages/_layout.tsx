@@ -23,6 +23,7 @@ import {Channel} from "@/models/Channel";
 import {useRouter} from "next/navigation";
 import {CHANNEL, PROFILE_ROUTE} from "@/constant/routes";
 import {SideBar} from "@/components/core/side-bar";
+import useStore from "@/store/use-store";
 
 
 type LayoutProps = {
@@ -33,7 +34,7 @@ function Layout({children}: LayoutProps): JSX.Element {
     const [channelsLoading, setChannelsLoading] = useState(false);
     const [menuToggle, setMenuToggle] = useState(false);
     const {channels, getChannels, createChannel} = useChannelStore();
-    const {user, logout} = useAuthStore()
+    const user = useStore(useAuthStore, (state)=> state.user);
     const [isSavingChannel, setIsSavingChannel] = useState(false);
     const initialRef = React.useRef(null)
     const nameRef = useRef<HTMLInputElement>(null);
@@ -78,7 +79,6 @@ function Layout({children}: LayoutProps): JSX.Element {
 
     const handleLogout = () => {
         toggle();
-        logout()
     }
 
     const onChannelItemClicked = async (channel: Channel) => {
