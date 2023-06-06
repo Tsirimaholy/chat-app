@@ -26,7 +26,8 @@ const useMessageStore = create<State & Action>()((set) => ({
     sendMessage: async (channelId: number, message: CreateMessage)=>{
         try {
             await MessageApi.sendMessage(channelId, message);
-            await MessageApi.getMessageByChannel(channelId);
+            const messagesByChannel = await MessageApi.getMessageByChannel(channelId);
+            set(state => ({...state, messages: messagesByChannel}));
         }catch (e) {
             throw e;
         }
