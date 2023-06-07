@@ -6,7 +6,7 @@ import ColorModeSwitch from "@/components/common/ColorModeSwitch";
 
 interface NavBarProps {
     onAvatarClicked: () => void;
-    user: User;
+    user?: User;
     menuToggle: boolean;
     onBadgeClicked: () => void;
 }
@@ -23,20 +23,20 @@ export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onAva
                      onClick={onAvatarClicked}
                      onBlur={onAvatarClicked}
                 >
-                    <Avatar size={"2xs"} name={`${user.name}`} src={"/assets/icon/user-avatar.png"}
+                    <Avatar size={"2xs"} name={`${user?.name}`} src={"/assets/icon/user-avatar.png"}
                             width={35}
                             height={35}
                             colorScheme={"blackAlpha"}
                             color={"white"}
                     />
-                    <Text as="b">{`@${user.name}`}</Text>
-                    {menuToggle && <div className={styles.menu}>
-                        <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-                            <Badge borderRadius="full" px="2" colorScheme="teal" onClick={onBadgeClicked}>
-                                <span className={"fa fa-lock"}/> Log Out
-                            </Badge>
-                        </Box>
-                    </div>}
+                    <Text as="b">{`@${user?.name||''}`}</Text>
+                    {/*{menuToggle && <div className={styles.menu}>*/}
+                    {/*    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">*/}
+                    {/*        <Badge borderRadius="full" px="2" colorScheme="teal" onClick={onBadgeClicked}>*/}
+                    {/*            <span className={"fa fa-lock"}/> Log Out*/}
+                    {/*        </Badge>*/}
+                    {/*    </Box>*/}
+                    {/*</div>}*/}
 
                 </div>
             </HStack>

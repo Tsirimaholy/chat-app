@@ -3,6 +3,7 @@ import {Box, Button, Spinner, Text} from "@chakra-ui/react";
 import {AddIcon} from "@chakra-ui/icons";
 import {ChannelList} from "@/components/core/channel/channels-list";
 import React from "react";
+import CreateChannelButton from "@/components/core/channel/create-channel-button";
 
 type SideBarProps = {
     onClick: () => void,
@@ -19,9 +20,7 @@ export function SideBar(props: SideBarProps) {
              backgroundColor={"var(--secondary-dark-color)"} pb={"4"}
              borderBottom={"1px solid var(--secondary-color)"}
         >
-            <Button onClick={onClick} rightIcon={<AddIcon boxSize={3}/>}>
-                Create chanel
-            </Button>
+            <CreateChannelButton/>
         </Box>
         <Box>
             <Box>
