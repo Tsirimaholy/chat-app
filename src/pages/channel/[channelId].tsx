@@ -21,8 +21,13 @@ function ChannelMessages() {
 
     useEffect(() => {
         (async () => {
-            const [_, channel] = await Promise.all([getMessagesByChannel(id), getChannelById(id)]);
-            setCurrentChannel(channel);
+            try {
+                const [_, channel] = await Promise.all([getMessagesByChannel(id), getChannelById(id)]);
+                setCurrentChannel(channel);
+            }catch (e) {
+                // TODO: handle error
+                console.log("an error occured")
+            }
         })()
     }, [getChannelById, getMessagesByChannel, id])
 
@@ -32,7 +37,8 @@ function ChannelMessages() {
 
 
     const handleSendMessage = async (messageContent: string) => {
-        await sendMessage(id, {recipientId: 1, channelId: id, content: messageContent});
+        // TODO: dynamic recipient id
+        await sendMessage(id, {recipientId: null, channelId: id, content: messageContent});
         // clear input value
         if (inputRef?.current?.value) inputRef.current.value = "";
     }
