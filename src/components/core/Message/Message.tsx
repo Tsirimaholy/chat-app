@@ -2,23 +2,22 @@ import {Avatar, HStack, ListItem} from "@chakra-ui/react";
 import React from "react";
 import {TMessage} from "@/models/TMessage";
 
-type MessageProps = { alignSelf: "left" | "right", message: TMessage };
+type MessageProps = { message: TMessage };
 
 export function Message(props: MessageProps) {
-    const {alignSelf, message: {content, sender}} = props;
-    const radius = alignSelf === 'left' ? "0 2em 2em 2em" : "2em 0 2em 2em";
+    const { message: {content, sender}} = props;
     return (
-        <HStack alignSelf={alignSelf}
-                flexDirection={alignSelf == "left" ? "row" : "row-reverse"}>
+        <HStack
+                >
             <Avatar size={"md"} name={sender.name}
                     bg={'gray.600'}
                     colorScheme={"blackAlpha"}
                     color={"white"}
-                    float={alignSelf}
                     marginX={"2"}
+                    marginRight={'0'}
             />
-            <ListItem p={"3"} backgroundColor={"blackAlpha.500"}
-                      borderRadius={radius}>
+            <ListItem p={"2"} backgroundColor={"blackAlpha.500"}
+                      borderRadius='md'>
                 {content}
             </ListItem>
         </HStack>
