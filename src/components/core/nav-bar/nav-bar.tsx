@@ -20,7 +20,7 @@ export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onAva
                 Sleek
             </Text>
             <HStack>
-                <ColorModeSwitch/>
+                {/*<ColorModeSwitch/>*/}
                 <div className={styles.avatar_wrapper}
                      onClick={onAvatarClicked}
                      onBlur={onAvatarClicked}
