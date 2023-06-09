@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import {usePathname, useRouter} from "next/navigation";
-import {HOME_ROUTE, LOGIN, ROOT_ROUTE} from "@/constant/routes";
+import {HOME_ROUTE, LOGIN, PROFILE_ROUTE, ROOT_ROUTE} from "@/constant/routes";
 import {useAuthStore} from "@/store/auth-store";
 import api from "@/services/api";
 
@@ -23,7 +23,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
         }
         if (isAuthenticated) {
             // Do not show login page anymore if already authenticated
-            if (currentPath == LOGIN || currentPath == ROOT_ROUTE) push(HOME_ROUTE);
+            if (currentPath == LOGIN || currentPath == ROOT_ROUTE) push(PROFILE_ROUTE);
         }
     }, [currentPath])
 
