@@ -10,22 +10,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
-    const {push} = useRouter();
-    const currentPath = usePathname();
-    const {user, setUpUnauthorizedInterceptor} = useAuthStore();
 
-
-    useEffect(() => {
-        const isAuthenticated = !!(user?.id && user.token);
-        if (!isAuthenticated) {
-            push(LOGIN);
-            return;
-        }
-        if (isAuthenticated) {
-            // Do not show login page anymore if already authenticated
-            if (currentPath == LOGIN || currentPath == ROOT_ROUTE) push(PROFILE_ROUTE);
-        }
-    }, [currentPath, push, user?.id, user.token])
 
     return (
         <>
