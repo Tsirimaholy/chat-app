@@ -16,7 +16,7 @@ function ChannelMessages() {
     const [currentChannel, setCurrentChannel] = useState<Channel>();
     const {messages, getMessagesByChannel, sendMessage} = useMessageStore();
     const {getChannelById} = useChannelStore();
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
 
 
     useEffect(() => {
