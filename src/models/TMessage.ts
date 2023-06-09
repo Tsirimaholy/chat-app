@@ -6,7 +6,7 @@ export type TMessage = {
     "createdAt": string,
     "updatedAt": string,
     "senderId": number,
-    "recipientId": number,
+    "recipientId"?: number,
     "channelId": number,
     "sender": Sender
 }

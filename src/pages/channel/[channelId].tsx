@@ -26,7 +26,7 @@ function ChannelMessages() {
                 setCurrentChannel(channel);
             }catch (e) {
                 // TODO: handle error
-                console.log("an error occured")
+                console.log("an error occurred")
             }
         })()
     }, [getChannelById, getMessagesByChannel, id])
@@ -38,20 +38,25 @@ function ChannelMessages() {
 
     const handleSendMessage = async (messageContent: string) => {
         // TODO: dynamic recipient id
-        await sendMessage(id, {recipientId: null, channelId: id, content: messageContent});
+        await sendMessage(id, {channelId: id, content: messageContent});
         // clear input value
         if (inputRef?.current?.value) inputRef.current.value = "";
     }
 
-    async function handleKeyEnterDown(event: React.KeyboardEvent<HTMLInputElement> | undefined) {
-        if (event?.key == 'Enter' && inputRef?.current?.value) await handleSendMessage(inputRef.current.value)
-    }
+    // async function handleKeyEnterDown(event: React.KeyboardEvent<HTMLTextAreaElement> | undefined) {
+    //     let prev='';
+    //     prev=''
+    //     console.log('enter')
+    //     if (event?.key == 'Enter' && inputRef?.current?.value) {
+    //         await handleSendMessage(inputRef.current.value)
+    //     }
+    // }
 
     return (
         <Layout>
             <ChannelHeader currentChannel={currentChannel}/>
             <MessageList messages={messages}/>
-            <MessageField ref={inputRef} onKeyDown={handleKeyEnterDown}
+            <MessageField ref={inputRef}
                           onClick={() => handleSendMessage(inputRef?.current?.value || ' ')}/>
         </Layout>
     );
