@@ -14,7 +14,6 @@ export default function App({Component, pageProps}: AppProps) {
     const {setUpJWT, user}= useAuthStore();
     useEffect(() => {
         const jwtRequestInterceptor = setUpJWT(user.token);
-        console.info('running jwt interceptor');
         return ()=>{
             api.interceptors.request.eject(jwtRequestInterceptor);
         }

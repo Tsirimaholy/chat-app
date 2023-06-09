@@ -12,7 +12,6 @@ export const MessageField = forwardRef<Ref, MessageFieldProps>((props, ref) => {
         <Input
             pr="4.5rem"
             type={"show"}
-            placeholder="Enter password"
             ref={ref}
             onKeyDown={props.onKeyDown}
         />
