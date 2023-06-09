@@ -13,9 +13,10 @@ import {
     ModalOverlay,
     Spinner
 } from "@chakra-ui/react";
+import {ChannelType} from "@/types/entities/channel/Channel";
 
 type ChannelCreationModalProps = {
-    handleSaveChannel:(channel: {name?: string, type?: string})=>void;
+    handleSaveChannel:(channel: {name?: string, type?: ChannelType})=>void;
     isSavingChannel: boolean;
     isOpen: boolean;
     onClose: ()=>void
