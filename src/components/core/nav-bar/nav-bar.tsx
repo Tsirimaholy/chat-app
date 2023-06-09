@@ -3,6 +3,8 @@ import React, {FC} from "react";
 import styles from "./Navbar.module.css";
 import {Avatar, Badge, Box, HStack, Text} from "@chakra-ui/react";
 import ColorModeSwitch from "@/components/common/ColorModeSwitch";
+import CHAvatar from "@/components/common/avatar";
+
 
 interface NavBarProps {
     onAvatarClicked: () => void;
@@ -23,12 +25,11 @@ export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onAva
                      onClick={onAvatarClicked}
                      onBlur={onAvatarClicked}
                 >
-                    <Avatar size={"2xs"} name={`${user?.name}`} src={"/assets/icon/user-avatar.png"}
-                            width={35}
-                            height={35}
-                            colorScheme={"blackAlpha"}
-                            color={"white"}
-                    />
+                    <CHAvatar  size={"2xs"} name={`${user?.name}`} src={"/assets/icon/user-avatar.png"}
+                               width={35}
+                               height={35}
+                               colorScheme={"blackAlpha"}
+                               color={"white"}/>
                     <Text as="b">{`@${user?.name||''}`}</Text>
                     {/*{menuToggle && <div className={styles.menu}>*/}
                     {/*    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">*/}
