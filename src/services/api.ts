@@ -5,12 +5,11 @@ import config from "./api-conf";
 const api = Axios.create({
     baseURL: config.baseUrl,
 });
-
-api.interceptors.response.use(null,(error) => {
-if(error.response.status){
-    console.log("unauthoriezd");
-    localStorage.clear()
-}
+// Todo maybe remove this later
+api.interceptors.response.use(null, (error) => {
+    if (error.response.status==401) {
+        localStorage.clear()
+    }
     return Promise.reject(error);
 })
 

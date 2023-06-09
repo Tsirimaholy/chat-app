@@ -28,9 +28,6 @@ export const useAuthStore = create<State & Action>()(persist((set, get, store) =
     user: DEFAULT_USER,
     setUpJWT: function (token: string) {
         return api.interceptors.request.use((config) => {
-            console.info(get().user.token)
-            if (token) console.info("token is here")
-            else console.info("no it's from the store")
             config.headers.Authorization = "JWT " + token || get().user.token;
             return config;
         })
@@ -46,7 +43,7 @@ export const useAuthStore = create<State & Action>()(persist((set, get, store) =
     },
     setUpUnauthorizedInterceptor: () => (
         api.interceptors.response.use(null, (error) => {
-            if (error.response.status) {
+            if (error.response.status == 401) {
                 get().logout();
             }
             return Promise.reject(error);

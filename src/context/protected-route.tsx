@@ -13,10 +13,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
     const {push} = useRouter();
     const currentPath = usePathname();
     const {user, setUpUnauthorizedInterceptor} = useAuthStore();
-    useEffect(() => {
-        const interceptor = setUpUnauthorizedInterceptor();
-        return api.interceptors.request.eject(interceptor);
-    }, [])
+
 
     useEffect(() => {
         const isAuthenticated = !!(user?.id && user.token);
