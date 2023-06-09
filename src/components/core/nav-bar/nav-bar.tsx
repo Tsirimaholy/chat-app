@@ -4,6 +4,8 @@ import styles from "./Navbar.module.css";
 import {Avatar, Badge, Box, HStack, Text} from "@chakra-ui/react";
 import ColorModeSwitch from "@/components/common/ColorModeSwitch";
 import CHAvatar from "@/components/common/avatar";
+import {useRouter} from "next/router";
+import {PROFILE_ROUTE} from "@/constant/routes";
 
 
 interface NavBarProps {
@@ -14,9 +16,11 @@ interface NavBarProps {
 }
 
 export const NavBar: FC<NavBarProps> = ({menuToggle=false, onBadgeClicked, onAvatarClicked, user}) => {
+    const {push} = useRouter();
+
     return (
         <HStack justifyContent={"space-between"} paddingInline={5} paddingBlock={1} mb={2} bg={"var(--primary-dark-color)"}>
-            <Text as={"b"} fontSize={"larger"}>
+            <Text as={"b"} fontSize={"larger"} onClick={()=>push(PROFILE_ROUTE)} cursor={'pointer'}>
                 Sleek
             </Text>
             <HStack>
