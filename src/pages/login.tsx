@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import styles from "@/styles/Login.module.css";
-import {CircularProgress} from "@chakra-ui/react";
+import {Button, CircularProgress} from "@chakra-ui/react";
 import {Inter} from "next/font/google";
 import {AuthUser} from "@/services/auth-api";
 import {useAuthStore} from "@/store/auth-store";
@@ -42,7 +42,7 @@ function Login() {
                 {loading && <CircularProgress value={30} color='orange' thickness='12px' isIndeterminate={true}
                                               position={"absolute"}/>}
                 <label>
-                    <input type={"text"} name={"email"}
+                    <input type={"email"} name={"email"}
                            className={`${styles.wrapper__input}`}
                            onChange={handleInputChange<AuthUser>(authInfos, "email")}
                            placeholder={"Username or Email"}
@@ -55,7 +55,7 @@ function Login() {
                            placeholder={"Password"}
                     />
                 </label>
-                <input type={"submit"} value={"Sign Up"} className={styles.submit} onClick={handleSubmit}/>
+                <Button type={"submit"}  name="loginButton" className={styles.submit} onClick={handleSubmit}>Login</Button>
             </form>
         </main>
     );
