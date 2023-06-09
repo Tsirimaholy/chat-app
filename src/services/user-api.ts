@@ -8,10 +8,8 @@ export type AuthUser = {
 
 class UserApi {
     async logIn(userDetails: AuthUser) {
-        const {data} = await api.post<User>("/users/login", userDetails);
+        const {data} = await api.post("/users/login", userDetails);
         const user = data?.user as User;
-        // JWT intercept
-        this.setUpJWT(user.token);
         return user;
     }
 
@@ -20,13 +18,6 @@ class UserApi {
         return {request}
     }
 
-    setUpJWT(token: string) {
-        console.info("Running interceptors")
-        api.interceptors.request.use((config) => {
-            config.headers.Authorization = "JWT " + token;
-            return config;
-        })
-    }
 }
 
 export default new UserApi();

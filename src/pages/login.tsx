@@ -22,7 +22,6 @@ function Login() {
         e.preventDefault();
         try {
             await logIn({...authInfos});
-            await UserApi.setUpJWT(token);
             await push(HOME_ROUTE);
         } catch (error) {
             console.log(e);

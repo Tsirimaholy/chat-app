@@ -12,7 +12,8 @@ type State = {
 type Action = {
     logIn: (authInfos: AuthUser) => Promise<void>;
     logout: () => void,
-    setUpUnauthorizedInterceptor:()=>number
+    setUpUnauthorizedInterceptor: () => number,
+    setUpJWT: (token: string) => number
 }
 
 const DEFAULT_USER: User = {
@@ -23,15 +24,25 @@ const DEFAULT_USER: User = {
     mail: "",
     token: ""
 };
-export const useAuthStore = create<State & Action>()(persist((set, get) => ({
+export const useAuthStore = create<State & Action>()(persist((set, get, store) => ({
     user: DEFAULT_USER,
-    logIn: async (authInfos) => {
+    setUpJWT: function (token: string) {
+        return api.interceptors.request.use((config) => {
+            console.info(get().user.token)
+            if (token) console.info("token is here")
+            else console.info("no it's from the store")
+            config.headers.Authorization = "JWT " + token || get().user.token;
+            return config;
+        })
+    }, logIn: async (authInfos) => {
         const user = await UserApi.logIn(authInfos);
         set((state) => ({...state, user}));
+        get().setUpJWT(user.token);
     },
     logout: () => {
         localStorage.clear();
         set(() => ({user: DEFAULT_USER}));
+
     },
     setUpUnauthorizedInterceptor: () => (
         api.interceptors.response.use(null, (error) => {
