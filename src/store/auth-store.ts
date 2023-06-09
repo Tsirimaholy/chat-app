@@ -2,7 +2,7 @@ import {create} from "zustand";
 import {User} from "@/types/entities/Auth";
 import {persist} from "zustand/middleware";
 import {AUTH_INFOS} from "@/constant/storage";
-import UserApi, {AuthUser} from "@/services/user-api";
+import UserApi, {AuthUser} from "@/services/auth-api";
 import api from "@/services/api";
 
 type State = {

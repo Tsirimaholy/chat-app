@@ -2,7 +2,7 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import styles from "@/styles/Login.module.css";
 import {CircularProgress} from "@chakra-ui/react";
 import {Inter} from "next/font/google";
-import {AuthUser} from "@/services/user-api";
+import {AuthUser} from "@/services/auth-api";
 import {useAuthStore} from "@/store/auth-store";
 import {useRouter} from "next/router";
 import {PROFILE_ROUTE} from "@/constant/routes";

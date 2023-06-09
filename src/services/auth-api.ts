@@ -6,7 +6,7 @@ export type AuthUser = {
     password: string;
 }
 
-class UserApi {
+class AuthApi {
     async logIn(userDetails: AuthUser) {
         const {data} = await api.post("/users/login", userDetails);
         const user = data?.user as User;
@@ -20,4 +20,4 @@ class UserApi {
 
 }
 
-export default new UserApi();
+export default new AuthApi();
