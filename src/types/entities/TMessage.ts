@@ -1,4 +1,4 @@
-import {Sender} from "@/models/Auth";
+import {Sender} from "@/types/entities/Auth";
 
 export type TMessage = {
     "id": number,
