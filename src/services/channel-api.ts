@@ -34,7 +34,7 @@ class ChannelApi {
 
     async createChannel(channel: Channel) {
         try {
-            const {data} = await api.post("/channel", {...channel, members: []});
+            const {data} = await api.post("/channel", {...channel});
             return data?.channel as Channel;
         } catch (e) {
             if (axios.isAxiosError(e)) {
