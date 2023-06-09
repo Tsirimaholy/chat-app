@@ -44,7 +44,7 @@ function Index() {
                         </Box>
                         <HStack flex={1} justifyContent={'end'} mt={'10'}>
                             <Button colorScheme='yellow' rightIcon={<EditIcon/>}>Edit Profile</Button>
-                            <Button colorScheme='red' rightIcon={<LockIcon/>} onClick={handleLogout}>Logout</Button>
+                            <Button colorScheme='red' rightIcon={<LockIcon/>} onClick={handleLogout} name={'logoutButton'}>Logout</Button>
                         </HStack>
                     </GridItem>
                 </Grid>
