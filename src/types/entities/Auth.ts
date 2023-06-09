@@ -12,6 +12,8 @@ export interface User {
     token: string;
 }
 
+export type OtherUser = Pick<User, 'id' | "email" | "mail" | "bio" | 'name'>;
+
 export interface UserProfile extends User{
     googleId?: string;
     status: number;
