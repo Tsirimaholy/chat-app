@@ -2,10 +2,10 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import styles from "@/styles/Login.module.css";
 import {CircularProgress} from "@chakra-ui/react";
 import {Inter} from "next/font/google";
-import UserApi, {AuthUser} from "@/services/user-api";
+import {AuthUser} from "@/services/user-api";
 import {useAuthStore} from "@/store/auth-store";
 import {useRouter} from "next/router";
-import {HOME_ROUTE} from "@/constant/routes";
+import {PROFILE_ROUTE} from "@/constant/routes";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -22,7 +22,7 @@ function Login() {
         e.preventDefault();
         try {
             await logIn({...authInfos});
-            await push(HOME_ROUTE);
+            await push(PROFILE_ROUTE);
         } catch (error) {
             console.log(e);
         }
