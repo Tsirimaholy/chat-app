@@ -1,6 +1,6 @@
 import {Avatar, HStack, ListItem, VStack, Text, Box} from "@chakra-ui/react";
 import React from "react";
-import {TMessage} from "@/models/TMessage";
+import {TMessage} from "@/types/entities/TMessage";
 
 type MessageProps = { message: TMessage };
 

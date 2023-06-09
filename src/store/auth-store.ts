@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {User} from "@/models/Auth";
+import {User} from "@/types/entities/Auth";
 import {persist} from "zustand/middleware";
 import {AUTH_INFOS} from "@/constant/storage";
 import UserApi, {AuthUser} from "@/services/user-api";

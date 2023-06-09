@@ -1,4 +1,4 @@
-import {User} from "@/models/Auth";
+import {User} from "@/types/entities/Auth";
 import React, {FC} from "react";
 import styles from "./Navbar.module.css";
 import {Avatar, Badge, Box, HStack, Text} from "@chakra-ui/react";

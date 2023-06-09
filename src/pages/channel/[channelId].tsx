@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import useMessageStore from "@/store/message-store";
 import {MessageList} from "@/components/core/Message/message-list";
 import {useChannelStore} from "@/store/channel-store";
-import {Channel} from "@/models/Channel";
+import {Channel} from "@/types/entities/channel/Channel";
 import {ChannelHeader} from "@/pages/channel/component/_ChannelHeading";
 import {MessageField} from "@/pages/channel/component/message-field";
 

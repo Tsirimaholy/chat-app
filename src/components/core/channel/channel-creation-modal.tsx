@@ -11,10 +11,8 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    Spinner,
-    useDisclosure
+    Spinner
 } from "@chakra-ui/react";
-import {Channel} from "@/models/Channel";
 
 type ChannelCreationModalProps = {
     handleSaveChannel:(channel: {name?: string, type?: string})=>void;

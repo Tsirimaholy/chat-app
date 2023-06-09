@@ -1,4 +1,4 @@
-import {CreateMessage, TMessage} from "@/models/TMessage";
+import {CreateMessage, TMessage} from "@/types/entities/TMessage";
 import {create} from "zustand";
 import MessageApi from "@/services/message-api";
 

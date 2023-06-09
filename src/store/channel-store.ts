@@ -1,7 +1,7 @@
 import {create} from "zustand";
 import ChannelApi from "@/services/channel-api";
 import {persist} from "zustand/middleware";
-import {Channel} from "@/models/Channel";
+import {Channel} from "@/types/entities/channel/Channel";
 import {CHANNELS_STORAGE} from "@/constant/storage";
 
 type State = {

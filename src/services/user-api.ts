@@ -1,5 +1,5 @@
 import api from "@/services/api";
-import {User} from "@/models/Auth";
+import {User} from "@/types/entities/Auth";
 
 export type AuthUser = {
     email: string;

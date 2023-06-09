@@ -1,4 +1,4 @@
-import {TMessage} from "@/models/TMessage";
+import {TMessage} from "@/types/entities/TMessage";
 import {List} from "@chakra-ui/react";
 import {Message} from "@/components/core/Message/Message";
 import React from "react";

@@ -19,7 +19,7 @@ import {
 import {NavBar} from "@/components/core/nav-bar/nav-bar";
 import {useChannelStore} from "@/store/channel-store";
 import {useAuthStore} from "@/store/auth-store";
-import {Channel} from "@/models/Channel";
+import {Channel} from "@/types/entities/channel/Channel";
 import {useRouter} from "next/navigation";
 import {CHANNEL, PROFILE_ROUTE} from "@/constant/routes";
 import {SideBar} from "@/components/core/side-bar";

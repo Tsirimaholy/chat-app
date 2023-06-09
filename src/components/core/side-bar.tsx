@@ -1,4 +1,4 @@
-import {Channel} from "@/models/Channel";
+import {Channel} from "@/types/entities/channel/Channel";
 import {Box, Button, Spinner, Text} from "@chakra-ui/react";
 import {AddIcon} from "@chakra-ui/icons";
 import {ChannelList} from "@/components/core/channel/channels-list";

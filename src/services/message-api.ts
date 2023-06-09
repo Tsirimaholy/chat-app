@@ -1,5 +1,5 @@
 import api from "@/services/api";
-import {CreateMessage, TMessage} from "@/models/TMessage";
+import {CreateMessage, TMessage} from "@/types/entities/TMessage";
 
 class MessageApi {
     async getAllMessageByUser(userId: number) {

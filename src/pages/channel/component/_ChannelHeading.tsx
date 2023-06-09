@@ -1,6 +1,6 @@
 import {Box, HStack, Text, VStack} from "@chakra-ui/react";
 import Avatar from "@/components/common/avatar";
-import {Channel} from "@/models/Channel";
+import {Channel} from "@/types/entities/channel/Channel";
 
 
 export function ChannelHeader(props: { currentChannel?: Channel }) {

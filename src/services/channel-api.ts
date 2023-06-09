@@ -1,5 +1,5 @@
 import api from "@/services/api";
-import {Channel} from "@/models/Channel";
+import {Channel} from "@/types/entities/channel/Channel";
 import axios, {AxiosError} from "axios";
 
 class ChannelApi {

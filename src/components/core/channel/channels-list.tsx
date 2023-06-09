@@ -1,4 +1,4 @@
-import {Channel} from "@/models/Channel";
+import {Channel} from "@/types/entities/channel/Channel";
 import {Box, List, Text} from "@chakra-ui/react";
 import {ChannelItem} from "@/components/core/channel/channelItem";
 import React, {useState} from "react";
